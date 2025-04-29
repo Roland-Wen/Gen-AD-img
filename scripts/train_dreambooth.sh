@@ -1,0 +1,13 @@
+python -m diffusers.examples.dreambooth.train_dreambooth \
+  --pretrained_model_name_or_path runwayml/stable-diffusion-v1-5 \
+  --instance_data_dir       data/processed/accident \
+  --output_dir              models/checkpoints/dreambooth_accident_v1 \
+  --instance_prompt         "a photo of <accident>" \
+  --class_data_dir          data/regularization \
+  --class_prompt            "a busy highway" \
+  --resolution              512 \
+  --train_batch_size        1 \
+  --learning_rate           5e-6 \
+  --max_train_steps         800 \
+  --gradient_checkpointing \
+  --mixed_precision fp16
