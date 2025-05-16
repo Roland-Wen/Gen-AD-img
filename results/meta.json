@@ -1,0 +1,12 @@
+{
+  "dreambooth": "models/checkpoints/dreambooth_accident_v1",
+  "controlnet": "models/controlnet_accident_seg",
+  "mask_dir": "data/processed/accident/conditioning_image",
+  "prompt_file": "data/prompts.txt",
+  "out_dir": "results",
+  "n_per_mask": 100,
+  "steps": 30,
+  "guidance": 7.5,
+  "seed": 42,
+  "last_run_timestamp": "2025-05-16 23:20:32"
+}

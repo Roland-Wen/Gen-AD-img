@@ -1,13 +1,13 @@
-python -m diffusers.examples.dreambooth.train_dreambooth \
+accelerate launch src/fine_tune/train_dreambooth_official.py \
   --pretrained_model_name_or_path runwayml/stable-diffusion-v1-5 \
-  --instance_data_dir       data/processed/accident \
-  --output_dir              models/checkpoints/dreambooth_accident_v1 \
-  --instance_prompt         "a photo of <accident>" \
-  --class_data_dir          data/regularization \
-  --class_prompt            "a busy highway" \
-  --resolution              512 \
-  --train_batch_size        1 \
-  --learning_rate           5e-6 \
-  --max_train_steps         800 \
+  --instance_data_dir data/processed/accident \
+  --class_data_dir    data/regularization \
+  --instance_prompt   "a photo of <accident>" \
+  --class_prompt      "a busy highway" \
+  --output_dir        models/checkpoints/dreambooth_accident_v1 \
+  --resolution 512 --train_batch_size 1 --max_train_steps 800 \
   --gradient_checkpointing \
+  --use_8bit_adam \
+  --enable_xformers_memory_efficient_attention \
+  --train_text_encoder False \
   --mixed_precision fp16

@@ -1,6 +1,22 @@
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
+classes = ['0', 'Car', 'CrashedCar', 'House', 'Lights', 'Person', 'Road', 'Sign', 'Sky', 'Traffic island', 'Tree', 'Truck', 'Wall']
+classes_remap = {
+    0: 255,
+    1: 1,
+    2: 4,
+    3: 255,
+    4: 2,
+    5: 3,
+    6: 0,
+    7: 2,
+    8: 255,
+    9: 0,
+    10: 255,
+    11: 1,
+    12: 255
+}
 
 def poly_txt_to_mask(txt_path: Path, out_png: Path, size=512):
     """
@@ -8,16 +24,17 @@ def poly_txt_to_mask(txt_path: Path, out_png: Path, size=512):
         class xc1 yc1 xc2 yc2 ...  (coords ∈ [0,1])
     and paint it into a single-channel mask.
     """
-    mask = Image.new("L", (size, size), 0)
+    mask = Image.new("L", (size, size), 255)
     draw = ImageDraw.Draw(mask)
 
     with open(txt_path) as fh:
         for line in fh:
             nums = [float(t) for t in line.strip().split()]
             cls, pts = int(nums[0]), nums[1:]
+            cls = classes_remap[cls]
             # convert normalised coords --> pixel tuples
             xy = [(pts[i]  * size, pts[i+1] * size) for i in range(0, len(pts), 2)]
-            draw.polygon(xy, fill=cls+1)  # +1 so 0 stays background
+            draw.polygon(xy, fill=cls)
 
     mask.save(out_png, "PNG")
 

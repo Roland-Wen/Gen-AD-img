@@ -39,7 +39,7 @@ if __name__ == "__main__":
     import argparse, glob
 
     parser = argparse.ArgumentParser(description="Batch-resize accident images")
-    parser.add_argument("--input-glob", type=str, default="data/raw/accident/*")
+    parser.add_argument("--input-glob", type=str, default="data/raw/accident/*.jpg")
     parser.add_argument("--out-dir",    type=Path, default=Path("data/processed/accident"))
     parser.add_argument("--size",       type=int, default=512)
     parser.add_argument("--keep-aspect", action="store_true")

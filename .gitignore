@@ -1,4 +1,7 @@
 data/**
+models/**
+results/images/*
+results/masks/*
 
 
 # Byte-compiled / optimized / DLL files

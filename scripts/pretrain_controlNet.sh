@@ -1,0 +1,12 @@
+accelerate launch ./src/training/train_controlnet.py \
+  --pretrained_model_name_or_path models/checkpoints/dreambooth_accident_v1 \
+  --controlnet_model_name_or_path lllyasviel/sd-controlnet-seg \
+  --output_dir models/controlnet_pre_cs \
+  --seed 42\
+  --train_data_dir data/processed/controlnet_train \
+  --caption_column label --proportion_empty_prompts 1.0 \
+  --resolution 512 --learning_rate 1e-5 \
+  --train_batch_size 2 --gradient_accumulation_steps 4 \
+  --num_train_epochs 5 --mixed_precision fp16 \
+  --use_8bit_adam --gradient_checkpointing \
+  --enable_xformers_memory_efficient_attention
